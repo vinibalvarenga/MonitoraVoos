@@ -28,6 +28,7 @@ class Voo(models.Model):
         ('vo', 'em_voo'),
         ('at', 'aterrisao')
     )
+    rota = models.ForeignKey(Rota, on_delete=models.CASCADE, null=True)
     id = models.IntegerField(primary_key=True)
     status = models.CharField(max_length=2, null=False, choices=STATUS_POSSIVEIS)
     piloto = models.CharField(max_length=20, null=False)
