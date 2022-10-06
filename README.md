@@ -62,4 +62,4 @@ pip install -r requirements.txt
 
 O projeto do monitoramento dos voos se baseia no seguinte mapeamento:
 
-![Mapeamento O-R](/MonitoraVoos/docs/img/ModeloOR.png "Mapeamento O-R")
+![Mapeamento O-R](/docs/img/ModeloOR.png "Mapeamento O-R")
