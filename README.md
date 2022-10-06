@@ -1,5 +1,7 @@
 # MonitoraVoos
 
+O seguinte projeto diz respeito ao desenvolvimento de um sistema de monitoramento de voos de aviões.
+
 ## Grupo 6
 
 Nome      | NUSP
@@ -55,3 +57,9 @@ pip install -r requirements.txt
 ```
 
 2. Abra um navegador web e abra a seguinte página: <http://localhost:8000/FIRST>.
+
+### Mapeamento O-R
+
+O projeto do monitoramento dos voos se baseia no seguinte mapeamento:
+
+![Mapeamento O-R](/docs/img/ModeloOR.png "Mapeamento O-R")
