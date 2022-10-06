@@ -29,7 +29,7 @@ class Voo(models.Model):
         ('at', 'aterrisao')
     )
     id = models.IntegerField(primary_key=True)
-    status = models.CharField(max_length=2, null=False, choiches=STATUS_POSSIVEIS)
+    status = models.CharField(max_length=2, null=False, choices=STATUS_POSSIVEIS)
     piloto = models.CharField(max_length=20, null=False)
     hora_partida = models.DateTimeField(auto_now=False)
     hora_chegada = models.DateTimeField(auto_now=False)
