@@ -21,48 +21,29 @@ class RotaModelCreateTest(TestCase):
         rota_1 = Rota.objects.get(codigo='D0810')
         self.assertEqual(rota_1.id, 1)
 
-class RotaModelReadTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Rota.objects.create(
-            codigo='D0810', 
-            origem='Goiânia',
-            destino='Rio de Janeiro',
-            aeroporto_partida='Santa Genoveva',
-            aeroporto_chegada='Santos Dumont',
-            hora_partida_prevista='08:43',
-            hora_chegada_prevista='10:00',
-            aeronave='A320',
-            companhia_aerea='Varig'
-        )
     def test_get_rota(self):
         rota_1 = Rota.objects.get(origem='Goiânia', destino='Rio de Janeiro', companhia_aerea='Varig')
         self.assertEqual(rota_1.codigo, 'D0810')
 
-class RotaModelUpdateTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Rota.objects.create(
-            codigo='D0810', 
-            origem='Goiânia',
-            destino='Rio de Janeiro',
-            aeroporto_partida='Santa Genoveva',
-            aeroporto_chegada='Santos Dumont',
-            hora_partida_prevista='08:43',
-            hora_chegada_prevista='10:00',
-            aeronave='A320',
-            companhia_aerea='Varig'
+    def test_atualiza_rota(self):
+        Rota.objects.update(
+            hora_partida_prevista='08:53',
+            hora_chegada_prevista='10:20'
         )
-    def test_criacao_id(self):
         rota_1 = Rota.objects.get(codigo='D0810')
-        self.assertEqual(rota_1.id, 1)
+        self.assertEqual(rota_1.hora_partida_prevista.strftime("%H:%M"), '08:53')
+
+    def test_deleta_rota(self):
+        Rota.objects.filter(codigo='D0810').delete()
+        with self.assertRaises(Rota.DoesNotExist):
+            Rota.objects.get(codigo='D0810')
 
 
 class VooModelCreateTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        rota_1 = Rota.objects.create(
-            codigo='D0810', 
+        Rota.objects.create(
+            codigo='A823', 
             origem='Goiânia',
             destino='Rio de Janeiro',
             aeroporto_partida='Santa Genoveva',
@@ -72,108 +53,31 @@ class VooModelCreateTest(TestCase):
             aeronave='A320',
             companhia_aerea='Varig'
         )
+        rota_1 = Rota.objects.get(codigo='A823')
         Voo.objects.create(
             rota=rota_1,
             data='2022-07-11',
-            hora_partida='',
-            hora_chegada='',
             piloto='Comandante Denio Almeida',
             status='Programado'
         )
 
     def test_criacao_id(self):
-        rota_1 = Rota.objects.get(codigo='D0810')
+        rota_1 = Rota.objects.get(codigo='A823')
         voo_1 = Voo.objects.get(rota=rota_1, data='2022-07-11')
         self.assertEqual(voo_1.id, 1)
 
-
-class VooModelReadTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        rota_1 = Rota.objects.create(
-            codigo='D0810', 
-            origem='Goiânia',
-            destino='Rio de Janeiro',
-            aeroporto_partida='Santa Genoveva',
-            aeroporto_chegada='Santos Dumont',
-            hora_partida_prevista='08:43',
-            hora_chegada_prevista='10:00',
-            aeronave='A320',
-            companhia_aerea='Varig'
-        )
-        Voo.objects.create(
-            rota=rota_1,
-            data='2022-07-11',
-            hora_partida='',
-            hora_chegada='',
-            piloto='Comandante Denio Almeida',
-            status='Programado'
-        )
-
     def test_get_voo(self):
-        rota_1 = Rota.objects.get(codigo='D0810')
+        rota_1 = Rota.objects.get(codigo='A823')
         voo_1 = Voo.objects.get(rota=rota_1, data='2022-07-11')
         self.assertEqual(voo_1.piloto, 'Comandante Denio Almeida')
 
-class VooModelUpdateTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        rota_1 = Rota.objects.create(
-            codigo='D0810', 
-            origem='Goiânia',
-            destino='Rio de Janeiro',
-            aeroporto_partida='Santa Genoveva',
-            aeroporto_chegada='Santos Dumont',
-            hora_partida_prevista='08:43',
-            hora_chegada_prevista='10:00',
-            aeronave='A320',
-            companhia_aerea='Varig'
-        )
-        Voo.objects.create(
-            rota=rota_1,
-            data='2022-07-11',
-            hora_partida='',
-            hora_chegada='',
-            piloto='Comandante Denio Almeida',
-            status='programado'
-        )
-
+    def test_update_voo(self):
         Voo.objects.update(
             status= 'pronto'
         )
-
-    def test_get_voo(self):
-        rota_1 = Rota.objects.get(codigo='D0810')
+        rota_1 = Rota.objects.get(codigo='A823')
         voo_1 = Voo.objects.get(rota=rota_1, data='2022-07-11')
         self.assertEqual(voo_1.status, 'pronto')
-
-
-class VooModelDeleteTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        rota_1 = Rota.objects.create(
-            codigo='D0810', 
-            origem='Goiânia',
-            destino='Rio de Janeiro',
-            aeroporto_partida='Santa Genoveva',
-            aeroporto_chegada='Santos Dumont',
-            hora_partida_prevista='08:43',
-            hora_chegada_prevista='10:00',
-            aeronave='A320',
-            companhia_aerea='Varig'
-        )
-        Voo.objects.create(
-            rota=rota_1,
-            data='2022-07-11',
-            hora_partida='',
-            hora_chegada='',
-            piloto='Comandante Denio Almeida',
-            status='programado'
-        )
-
-        Voo.objects.update(
-            status= 'pronto'
-        )
 
     def test_delete_voo(self):
         tamOriginal = len(Voo.objects.all())

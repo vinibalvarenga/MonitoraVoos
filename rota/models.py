@@ -32,8 +32,8 @@ class Voo(models.Model):
     id = models.IntegerField(primary_key=True)
     status = models.CharField(max_length=2, null=False, choices=STATUS_POSSIVEIS)
     piloto = models.CharField(max_length=20, null=False)
-    hora_partida = models.TimeField(auto_now=False)
-    hora_chegada = models.TimeField(auto_now=False)
+    hora_partida = models.TimeField(auto_now=False, null=True)
+    hora_chegada = models.TimeField(auto_now=False, null=True)
     data = models.DateTimeField(null=True)
     class Meta:
         db_table = 'voos'
