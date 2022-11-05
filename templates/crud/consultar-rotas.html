@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Consultar Rotas{% endblock title %}
+
+{% block content %}
+    <h2>Rotas</h2>
+    {% for rota in object_list %}
+        <a href="{% url 'mostrar-rota' rota.codigo">{{ rota.codigo }}</a>
+    {% endfor %}
+{% endblock %}

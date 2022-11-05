@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Excluir Rota{% endblock title %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        <p>Tem certeza que quer excluir a rota "{{ object.codigo }}"?</p>
+        <div>
+            <input type="submit" value="Confirmar">
+            <a href="/crud/excluir-rota"> Voltar  </a>
+        </div>
+    </form>
+{% endblock %}
