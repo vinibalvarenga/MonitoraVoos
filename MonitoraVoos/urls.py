@@ -39,5 +39,7 @@ urlpatterns = [
     path('crud/excluir-voo/<pk>', views.VooDelete.as_view(), name='confirmar-excluir-voo'),
     path('monitoramento/', views.monitoramento, name='monitoramento'),
     path('monitoramento/<pk>', views.MonitoraVoo.as_view(), name='status-manager'),
-    path('geracaoRelatorios/', views.geracaoRelatorios)
+    path('geracao-relatorios/', views.geracao_relatorios),
+    path('geracao-relatorios/voos-companhia', views.voos_companhia, name='relatorio-voos-companhia'),
+    path('geracao-relatorios/voos-destino', views.voos_destino, name='relatorio-voos-destino')
 ]

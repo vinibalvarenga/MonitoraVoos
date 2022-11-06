@@ -18,8 +18,8 @@ def areaLogada(request):
 def crud(request):
     return render(request,"crud.html")
 
-def geracaoRelatorios(request):
-    return render(request,"geracaoRelatorios.html")
+def geracao_relatorios(request):
+    return render(request,"geracao_relatorios.html")
 
 def monitoramento(request):
     voos = Voo.objects.all()
@@ -27,6 +27,12 @@ def monitoramento(request):
         'voos': voos,
     }
     return render(request,"monitoramento.html", context)
+
+def voos_companhia(request):
+    return render(request,"geracao_relatorios/voos_companhia.html")
+
+def voos_destino(request):
+    return render(request,"geracao_relatorios/voos_destino.html")
 
 class MonitoraVoo(UpdateView):
     model = Voo
