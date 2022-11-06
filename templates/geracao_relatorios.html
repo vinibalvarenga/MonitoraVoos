@@ -41,6 +41,14 @@
         <div class="jumbotron">
             <h1 class="display-4"> Geração de Relatórios <i class="fas fa-globe-americas"></i></h1>
             <p class="lead">Tela para gerar relatórios adiministrativos.</p>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-primary btn-lg" href="{% url 'relatorio-voos-companhia' %}" role="button">Voos por companhia</a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-primary btn-lg" href="{% url 'relatorio-voos-destino' %}" role="button">Voos por destino</a>
+                </div>
+            </div>
     </div>
 
 </body>
