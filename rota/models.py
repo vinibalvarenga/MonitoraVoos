@@ -12,6 +12,10 @@ class Rota(models.Model):
     destino = models.CharField(max_length=20, null=False)
     aeronave = models.CharField(max_length=20, null=False)
     companhia_aerea = models.CharField(max_length=20, null=False)
+
+    def __str__(self):
+        return self.codigo
+
     class Meta:
         db_table = 'rotas'
 
