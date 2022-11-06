@@ -30,6 +30,14 @@ urlpatterns = [
     path('crud/atualizar-rota/<int:pk>', views.RotaUpdate.as_view(), name='rota-update-form'),
     path('crud/excluir-rota', views.RotaDeleteListView.as_view(), name='excluir-rota'),
     path('crud/excluir-rota/<pk>', views.RotaDelete.as_view(), name='confirmar-excluir-rota'),
-    path('geracaoRelatorios/', views.geracaoRelatorios),
-    path('monitoramento/', views.monitoramento)
+    path('crud/criar-voo', views.VooCreate.as_view(), name='criar-voo'),
+    path('crud/consultar-voos', views.VooListView.as_view(), name='consultar-voo'),
+    path('crud/consultar-voos/<int:pk>', views.VooDetailView.as_view(), name='voo-detail'),
+    path('crud/atualizar-voo', views.VooUpdateListView.as_view(), name='atualizar-voo'),
+    path('crud/atualizar-voo/<int:pk>', views.VooUpdate.as_view(), name='voo-update-form'),
+    path('crud/excluir-voo', views.VooDeleteListView.as_view(), name='excluir-voo'),
+    path('crud/excluir-voo/<pk>', views.VooDelete.as_view(), name='confirmar-excluir-voo'),
+    path('monitoramento/', views.monitoramento, name='monitoramento'),
+    path('monitoramento/<pk>', views.MonitoraVoo.as_view(), name='status-manager'),
+    path('geracaoRelatorios/', views.geracaoRelatorios)
 ]

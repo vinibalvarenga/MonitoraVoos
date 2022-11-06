@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
+from django import forms
 # from django.contrib.auth.decorators import login_required, permission_required
 
 # from rota.forms import CriarRotaForm
-from rota.models import Rota
+from rota.models import Rota, Voo
 
 # Create your views here.
 def login(request):
@@ -21,10 +22,18 @@ def geracaoRelatorios(request):
     return render(request,"geracaoRelatorios.html")
 
 def monitoramento(request):
-    return render(request,"monitoramento.html")
+    voos = Voo.objects.all()
+    context = {
+        'voos': voos,
+    }
+    return render(request,"monitoramento.html", context)
 
-def get_rotas(request):
-    return render(request,"crud/consultar-rotas.html")
+class MonitoraVoo(UpdateView):
+    model = Voo
+    fields = ['status']
+    template_name = 'monitoramento/status_manager.html'
+    success_url = reverse_lazy('monitoramento')
+
 
 class RotaCreate(CreateView):
     model = Rota
@@ -45,7 +54,7 @@ class RotaListView(ListView):
 
 class RotaDetailView(DetailView):
     model = Rota
-    template_name = 'crud/consultar-rotas/rota_detail.html'
+    template_name = 'crud/consultar_rotas/rota_detail.html'
 
 class RotaDeleteListView(ListView):
     model = Rota
@@ -57,9 +66,33 @@ class RotaDelete(DeleteView):
     success_url = reverse_lazy('crud')
 
 
+class VooCreate(CreateView):
+    model = Voo
+    fields = '__all__'
+    success_url = reverse_lazy('crud')
 
-def buscar_rota(request):
-    if request.method == "POST":
-        searched = request.POST['searched']
-        rota = Rota.objects.filter(name__contains==searched)
-    return render(request, '')
+class VooUpdateListView(ListView):
+    model = Voo
+    template_name = 'crud/atualizar_voo.html'
+
+class VooUpdate(UpdateView):
+    model = Voo
+    fields = ['status', 'data', 'hora_partida', 'hora_chegada', 'piloto']
+    success_url = reverse_lazy('crud')
+
+class VooListView(ListView):
+    model = Voo
+
+class VooDetailView(DetailView):
+    model = Voo
+    template_name = 'crud/consultar_voos/voo_detail.html'
+
+class VooDeleteListView(ListView):
+    model = Voo
+    template_name = 'crud/excluir_voo.html'
+
+class VooDelete(DeleteView):
+    model = Voo
+    template_name = 'crud/excluir_voo/confirmar_excluir_voo.html'
+    success_url = reverse_lazy('crud')
+

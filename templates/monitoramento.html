@@ -43,7 +43,13 @@
             <p class="lead">Tela para o monitoramento dos voos e atualização dos
                 seus status e horários.
             </p>
-            </div>
+            <hr class="my-4">
+            <p class="lead">Escolha o voo a ser atualizado</p>
+            {% for voo in voos %}
+                <a href="{% url 'status-manager' voo.id %}">{{ voo.id }}</a>
+                <br/>
+            {% endfor %}
+        </div>
     </div>
 
 </body>
