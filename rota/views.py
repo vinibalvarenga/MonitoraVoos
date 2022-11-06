@@ -29,10 +29,36 @@ def monitoramento(request):
     return render(request,"monitoramento.html", context)
 
 def voos_companhia(request):
-    return render(request,"geracao_relatorios/voos_companhia.html")
+    voos = Voo.objects.all()
+
+    freq = {}
+    for voo in voos:
+        if voo.rota.companhia_aerea in freq:
+            freq[voo.rota.companhia_aerea] += 1
+        else:
+            freq[voo.rota.companhia_aerea] = 1
+
+    
+    context = {
+        'companhias_aereas': freq,
+    }
+    return render(request,"geracao_relatorios/voos_companhia.html", context)
 
 def voos_destino(request):
-    return render(request,"geracao_relatorios/voos_destino.html")
+    voos = Voo.objects.all()
+
+    freq = {}
+    for voo in voos:
+        if voo.rota.destino in freq:
+            freq[voo.rota.destino] += 1
+        else:
+            freq[voo.rota.destino] = 1
+
+    
+    context = {
+        'destinos': freq,
+    }
+    return render(request,"geracao_relatorios/voos_destino.html", context)
 
 class MonitoraVoo(UpdateView):
     model = Voo
