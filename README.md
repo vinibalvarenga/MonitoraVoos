@@ -81,3 +81,7 @@ O projeto do monitoramento dos voos se baseia no seguinte mapeamento:
 As telas do projeto seguem o seguinte esquema:
 
 ![Modelo de Interface](/docs/img/ModeloDeInterface.png "Modelo de Interface")
+
+#### Login
+
+Atenção! É permitido que o usuário erre até três vezes o login. Se não, após essas tentativas ele deve esperar por três minutos para fazer novas tentativas.
