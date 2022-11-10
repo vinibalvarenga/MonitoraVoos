@@ -45,7 +45,7 @@ Yuri de Sene Alvizi       | 11260398
 6. Instale as dependências:
 
 ```
-pip install django
+pip install -r requirements.txt
 ```
 
 ### Executar o projeto
