@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rota'
+    'rota',
+    'axes', # Axes
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware', # Axes 
 ]
 
 ROOT_URLCONF = 'MonitoraVoos.urls'
@@ -127,3 +129,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
+
+AUTHENTICATION_BACKENDS = [
+   'axes.backends.AxesBackend',
+   'django.contrib.auth.backends.ModelBackend',
+]
+
+AXES_FAILURE_LIMIT: 3
+AXES_COOLOFF_TIME: 0.05
+AXES_RESET_ON_SUCCESS = True
+AXES_ONLY_USER_FAILURES = True
