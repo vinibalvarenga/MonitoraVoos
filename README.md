@@ -24,22 +24,22 @@ Yuri de Sene Alvizi       | 11260398
   git clone https://github.com/vinibalvarenga/MonitoraVoos.git
 ```
 
-3. Entre na pasta **MonitoraVoos**:
-
-```
-  cd MonitoraVoos
-```
-
-4. Crie um ambiente virtual chamado **env** usando:
+3. Crie um ambiente virtual chamado **env** usando:
 
 ```
   python -m venv env
 ```
 
-5. Ative o ambiente usando o comando:
+4. Ative o ambiente usando o comando:
 
 ```
   .\env\scripts\Activate.ps1
+```
+
+5. De acordo com o seu diretório, vá até a pasta **MonitoraVoos**:
+
+```
+  cd MonitoraVoos
 ```
 
 6. Instale as dependências:
