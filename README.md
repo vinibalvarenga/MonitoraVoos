@@ -50,13 +50,25 @@ pip install django
 
 ### Executar o projeto
 
-1. Ainda no mesmo terminal, digite o comando:
+1. Ainda no mesmo terminal, volte para a pasta raiz:
+
+```
+  cd ..
+```
+
+2. Escreva o seguinte comando para a realização dos testes:
+
+```
+  python manage.py test
+```
+
+3. Agora digite o comando para rodar o projeto:
 
 ```
   python manage.py runserver
 ```
 
-2. Abra um navegador web e abra a seguinte página: <http://localhost:8000/FIRST>.
+4. Abra um navegador web e abra a seguinte página: <http://127.0.0.1:8000/>.
 
 ### Mapeamento O-R
 
