@@ -4,25 +4,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>Área logada</title>
+    <link rel="shortcut icon" href="#">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
 
-<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">Menu</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href={% url 'home'%}>Home</a>
@@ -36,44 +34,52 @@
             </div>
         </div>
     </nav>
-
+    <!-- Header-->
     {%block content%}
+    <header class="bg-primary bg-gradient text-white">
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Bem vindo ao sistema de monitoramento de voos! <i class="fas fa-globe-americas"></i></h1>
+            <h1>Bem vindo ao sistema de monitoramento de voos! <i class="fas fa-globe-americas"></i></h1>
             <hr class="my-4">
             {%if user.is_authenticated %}
-                <p>Escolha uma das opções abaixo</p>
                 <div class="row">
                     <div class="col">
                         {% if perms.rota.change_rota %}
-                            <a class="btn btn-primary btn-lg" href="/crud" role="button">Gerenciar Voos</a>
+                            <a class="btn btn-light btn-lg" href="/crud" role="button">Gerenciar Voos</a>
                         {% else %}
-                            <button disabled class="btn btn-primary btn-lg" role="button">Gerenciar Voos</button>
+                            <button disabled class="btn btn-light btn-lg" role="button">Gerenciar Voos</button>
                         {% endif %}
                     </div>
                     <div class="col">
                         {% if perms.rota.change_voo %}
-                            <a class="btn btn-primary btn-lg" href="/monitoramento" role="button">Monitorar Voos</a>
+                            <a class="btn btn-light btn-lg" href="/monitoramento" role="button">Monitorar Voos</a>
                         {% else %}
-                            <button disabled class="btn btn-primary btn-lg" href="/monitoramento" role="button">Monitorar Voos</button>
+                            <button disabled class="btn btn-light btn-lg" href="/monitoramento" role="button">Monitorar Voos</button>
                         {% endif %}
                     </div>
                     <div class="col">
                         {% if perms.rota.view_voo %}
-                            <a class="btn btn-primary btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</a>
+                            <a class="btn btn-light btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</a>
                         {% else %}
-                            <button disabled class="btn btn-primary btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</button>
+                            <button disabled class="btn btn-light btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</button>
                         {% endif %}
                     </div>
                 </div>
             {% else %}
                 <p>Você não está logado</p>
-                <a href="{% url 'login' %}">Log In</a>
+                <a href="{% url 'login' %}" class="btn btn-light" role="button">Login</a>
             {% endif%}
         </div>
     </div>
     {%endblock%}
+    </header>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark fixed-bottom">
+        <div class="container px-4"><p class="m-0 text-center text-white">MonitoraVoos</p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
-
 </html>
