@@ -6,7 +6,7 @@ from django import forms
 # from django.contrib.auth.decorators import login_required, permission_required
 
 # from rota.forms import CriarRotaForm
-from rota.models import Rota, Voo
+from rota.models import Rota, Voo, RotaForm
 
 # Create your views here.
 def login(request):
@@ -69,7 +69,8 @@ class MonitoraVoo(UpdateView):
 
 class RotaCreate(CreateView):
     model = Rota
-    fields = '__all__'
+    # fields = '__all__'
+    form_class = RotaForm
     success_url = reverse_lazy('crud')
 
 class RotaUpdateListView(ListView):
