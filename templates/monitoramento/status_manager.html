@@ -3,7 +3,13 @@
 {% block title %} Monitoramento {% endblock %}
 
 {% block content %}
-    <h1>Voo: {{ voo.rota.codigo }}</h1>
+
+
+<header class="bg-primary bg-gradient text-white">
+    <div class="container">
+            <h1>Voo: {{ voo.rota.codigo }}</h1>
+    </div>
+</header>
 
     <p><strong>Companhia aerea:</strong> {{ voo.rota.companhia_aerea }} </p> 
     <p><strong>Data:</strong> {{ voo.data }} </p> 

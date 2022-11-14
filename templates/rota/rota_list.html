@@ -3,7 +3,13 @@
 {% block title %}Consultar Rotas{% endblock title %}
 
 {% block content %}
-    <h2>Rotas</h2>
+
+<header class="bg-primary bg-gradient text-white">
+    <div class="container">
+            <h1>Rotas</h1>
+    </div>
+</header>
+
     {% comment %} <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Código da rota" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
@@ -19,4 +25,11 @@
             <li>{{ rota.codigo }}</li>
         {% endfor %}
     </ul> {% endcomment %}
+
+
+<!-- Footer-->
+<footer class="py-5 bg-dark fixed-bottom">
+    <div class="container px-4"><p class="m-0 text-center text-white">MonitoraVoos</p></div>
+</footer>
+
 {% endblock %}
