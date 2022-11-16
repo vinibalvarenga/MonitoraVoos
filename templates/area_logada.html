@@ -84,6 +84,7 @@
                 <th scope="col">Voo</th>
                 <th scope="col">Status</th>
                 <th scope="col">Destino</th>
+                <th scope="col">Aeroporto</th>
                 <th scope="col">Partida Prevista</th>
                 <th scope="col">Partida Real</th>
               </tr>
@@ -95,6 +96,7 @@
                         <td>{{ voo.id }}</td>
                         <td>{{ voo.get_status_display }}</td>
                         <td>{{ voo.rota.destino }}</td>
+                        <td>{{ voo.rota.aeroporto_chegada }}</td>
                         <td>{{ voo.rota.hora_partida_prevista }}</td>
                         <td>{{ voo.hora_partida }}</td>
                     </tr>
@@ -117,6 +119,7 @@
             </thead>
             <tbody>
                 {% for voo in voos %}
+                {% if voo.rota.aeroporto_partida != 'Guarulhos' %}
                 <tr>
                     <td>{{ voo.rota.companhia_aerea }}</td>
                     <td>{{ voo.id }}</td>
@@ -124,6 +127,7 @@
                     <td>{{ voo.rota.hora_chegada_prevista }}</td>
                     <td>{{ voo.hora_chegada }}</td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
           </table>
