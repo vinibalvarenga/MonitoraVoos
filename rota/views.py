@@ -69,7 +69,6 @@ class MonitoraVoo(UpdateView):
 
 class RotaCreate(CreateView):
     model = Rota
-    # fields = '__all__'
     form_class = RotaForm
     success_url = reverse_lazy('crud')
 
