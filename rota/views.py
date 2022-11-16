@@ -12,8 +12,8 @@ from rota.models import Rota, Voo, RotaForm
 def login(request):
     return render(request,"login.html")
 
-def areaLogada(request):
-    return render(request,"areaLogada.html")
+def area_logada(request):
+    return render(request,"area_logada.html")
 
 def crud(request):
     return render(request,"crud.html")
