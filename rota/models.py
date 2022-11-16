@@ -91,3 +91,27 @@ class RotaForm(ModelForm):
             ])
 
         return self.cleaned_data
+
+
+class RotaUpdateForm(ModelForm):
+    class Meta:
+        # write the name of models for which the form is made
+        model = Rota    
+ 
+        # Custom fields
+        fields = ['aeronave', 'hora_partida_prevista', 'hora_chegada_prevista']
+ 
+    # this function will be used for the validation
+    def clean(self):
+
+        super(RotaUpdateForm, self).clean()
+
+        hora_partida_prevista = self.cleaned_data.get('hora_partida_prevista')
+        hora_chegada_prevista = self.cleaned_data.get('hora_chegada_prevista')
+
+
+        if hora_partida_prevista > hora_chegada_prevista:
+            self._errors['hora_chegada_prevista'] = self.error_class([
+                'Hora de chegada deve ser maior que hora de partida'])
+
+        return self.cleaned_data

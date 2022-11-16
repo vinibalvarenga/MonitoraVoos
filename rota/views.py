@@ -6,7 +6,7 @@ from django import forms
 # from django.contrib.auth.decorators import login_required, permission_required
 
 # from rota.forms import CriarRotaForm
-from rota.models import Rota, Voo, RotaForm
+from rota.models import Rota, Voo, RotaForm, RotaUpdateForm
 
 # Create your views here.
 def login(request):
@@ -82,7 +82,7 @@ class RotaUpdateListView(ListView):
 
 class RotaUpdate(UpdateView):
     model = Rota
-    fields = ['aeronave', 'hora_partida_prevista', 'hora_chegada_prevista']
+    form_class= RotaUpdateForm
     success_url = reverse_lazy('crud')
 
 class RotaListView(ListView):
