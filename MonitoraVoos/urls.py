@@ -21,7 +21,7 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("django.contrib.auth.urls")),
-    path('', TemplateView.as_view(template_name='area_logada.html'), name='home'),
+    path('', views.area_logada, name='home'),
     path('crud/', TemplateView.as_view(template_name='crud.html'), name='crud'),
     path('crud/criar-rota', views.RotaCreate.as_view(), name='criar-rota'),
     path('crud/consultar-rotas', views.RotaListView.as_view(), name='consultar-rota'),
