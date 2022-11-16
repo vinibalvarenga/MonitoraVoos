@@ -13,7 +13,11 @@ def login(request):
     return render(request,"login.html")
 
 def area_logada(request):
-    return render(request,"area_logada.html")
+    voos = Voo.objects.all()
+    context = {
+        'voos': voos,
+    }
+    return render(request,"area_logada.html", context)
 
 def crud(request):
     return render(request,"crud.html")
