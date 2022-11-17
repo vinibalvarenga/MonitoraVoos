@@ -112,7 +112,13 @@
               <tr>
                 <th scope="col">Companhia aérea</th>
                 <th scope="col">Voo</th>
+<<<<<<< HEAD
                 <th scope="col">Origem</th>
+=======
+                <th scope="col">Status</th>
+                <th scope="col">Origem</th>
+                <th scope="col">Aeroporto</th>
+>>>>>>> f2951a89dedc1b5e738cb1f67f5a587fcbb3e4e6
                 <th scope="col">Chegada Prevista</th>
                 <th scope="col">Chegada Real</th>
               </tr>
@@ -123,7 +129,13 @@
                 <tr>
                     <td>{{ voo.rota.companhia_aerea }}</td>
                     <td>{{ voo.id }}</td>
+<<<<<<< HEAD
                     <td>{{ voo.rota.origem }}</td>
+=======
+                    <td>{{ voo.get_status_display }}</td>
+                    <td>{{ voo.rota.origem }}</td>
+                    <td>{{ voo.rota.aeroporto_partida }}</td>
+>>>>>>> f2951a89dedc1b5e738cb1f67f5a587fcbb3e4e6
                     <td>{{ voo.rota.hora_chegada_prevista }}</td>
                     <td>{{ voo.hora_chegada }}</td>
                 </tr>
