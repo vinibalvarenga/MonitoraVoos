@@ -6,7 +6,7 @@ from django import forms
 # from django.contrib.auth.decorators import login_required, permission_required
 
 # from rota.forms import CriarRotaForm
-from rota.models import Rota, Voo, RotaForm, RotaUpdateForm
+from rota.models import Rota, Voo, RotaForm, RotaUpdateForm, VooFuncionarioForm, VooPilotoForm, VooTorreForm
 
 # Create your views here.
 def login(request):
@@ -66,9 +66,16 @@ def voos_destino(request):
 
 class MonitoraVoo(UpdateView):
     model = Voo
-    fields = ['status']
     template_name = 'monitoramento/status_manager.html'
     success_url = reverse_lazy('monitoramento')
+
+    def get_form_class(self):
+        if self.request.user.groups.filter(name='Piloto').exists():
+            return VooPilotoForm
+        elif self.request.user.groups.filter(name='Torre de Controle').exists():
+            return VooTorreForm
+        else:
+            return VooFuncionarioForm
 
 
 class RotaCreate(CreateView):
@@ -104,7 +111,7 @@ class RotaDelete(DeleteView):
 
 class VooCreate(CreateView):
     model = Voo
-    fields = '__all__'
+    fields = ['rota', 'id', 'piloto', 'hora_partida', 'hora_chegada', 'data']
     success_url = reverse_lazy('crud')
 
 class VooUpdateListView(ListView):
