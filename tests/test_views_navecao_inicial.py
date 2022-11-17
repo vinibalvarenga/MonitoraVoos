@@ -15,7 +15,7 @@ class NavegacaoInicialViewTest (TestCase):
     
     def test_view_home_page_template(self):
         response = self.client.get(reverse('home'))
-        self.assertTemplateUsed(response,'areaLogada.html' )
+        self.assertTemplateUsed(response,'area_logada.html' )
 
     def test_view_home_page_content(self):
         response = self.client.get(reverse('home'))
