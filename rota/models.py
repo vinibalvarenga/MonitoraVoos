@@ -32,11 +32,11 @@ class Voo(models.Model):
         ('pt', 'pronto'),
         ('ao', 'autorizado'),
         ('vo', 'em_voo'),
-        ('at', 'aterrisao')
+        ('at', 'aterrisado')
     )
     rota = models.ForeignKey(Rota, on_delete=models.CASCADE, null=True)
     id = models.IntegerField(primary_key=True)
-    status = models.CharField(max_length=2, null=False, choices=STATUS_POSSIVEIS)
+    status = models.CharField(max_length=2, null=True, choices=STATUS_POSSIVEIS)
     piloto = models.CharField(max_length=20, null=False)
     hora_partida = models.TimeField(auto_now=False, null=True)
     hora_chegada = models.TimeField(auto_now=False, null=True)
@@ -113,5 +113,87 @@ class RotaUpdateForm(ModelForm):
         if hora_partida_prevista > hora_chegada_prevista:
             self._errors['hora_chegada_prevista'] = self.error_class([
                 'Hora de chegada deve ser maior que hora de partida'])
+
+        return self.cleaned_data
+
+class VooFuncionarioForm(ModelForm):
+
+    class Meta:
+        model = Voo
+
+        fields = ['status', 'hora_partida', 'hora_chegada']
+
+    def clean(self):
+
+        super(VooFuncionarioForm, self).clean()
+
+        primeiro_status = ['embarcando', 'cancelado']
+        
+        status_anterior =  self.instance.get_status_display()
+        status_novo = self.cleaned_data.get('status')
+        hora_partida = self.cleaned_data.get('hora_partida')
+        hora_chegada = self.cleaned_data.get('hora_chegada')
+
+        if hora_partida > hora_chegada:
+            self._errors['hora_chegada'] = self.error_class(['Hora de chegada deve ser maior que hora de partida'])
+
+        if str(status_anterior) not in ['None', 'embarcando']:
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'None' and status_novo not in primeiro_status:
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'embarcando' and status_novo != 'pr':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+
+        return self.cleaned_data
+
+class VooTorreForm(ModelForm):
+    class Meta:
+        model = Voo
+
+        fields = ['status']
+
+    def clean(self):
+
+        super(VooTorreForm, self).clean()
+
+        status_iniciais = ['pronto', 'programado', 'em_voo']
+
+        status_anterior =  self.instance.get_status_display()
+        status_novo = self.cleaned_data.get('status')
+
+
+        if status_anterior not in status_iniciais:
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'pronto' and status_novo != 'ao':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'programado' and status_novo != 'ta':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'em_voo' and status_novo != 'at':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+
+        return self.cleaned_data
+
+class VooPilotoForm(ModelForm):
+    class Meta:
+        model = Voo
+
+        fields = ['status']
+
+    def clean(self):
+
+        super(VooPilotoForm, self).clean()
+
+        status_iniciais = ['taxiando', 'autorizado']
+
+        status_anterior =  self.instance.get_status_display()
+        status_novo = self.cleaned_data.get('status')
+
+
+        if status_anterior not in status_iniciais:
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'taxiando' and status_novo != 'pt':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
+        elif status_anterior == 'autorizado' and status_novo != 'vo':
+            self._errors['status'] = self.error_class(['Mudança de status não permitida'])
 
         return self.cleaned_data

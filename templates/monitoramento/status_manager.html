@@ -23,7 +23,17 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.non_field_errors }}
+        {% if user.groups.all.0.name == "Funcionario" %}
         <div class="fieldWrapper">
+            {{ form.hora_partida.errors }}
+            <label for="{{ form.hora_partida.id_for_label }}">Atualizar horário de partida:</label>
+            {{ form.hora_partida }}
+        <div class="fieldWrapper">
+            {{ form.hora_chegada.errors }}
+            <label for="{{ form.hora_chegada.id_for_label }}">Atualizar horário de chegada:</label>
+            {{ form.hora_chegada }}
+        </div>
+        {% endif %}
             {{ form.status.errors }}
             <label for="{{ form.status.id_for_label }}">Atualizar status:</label>
             {{ form.status }}
