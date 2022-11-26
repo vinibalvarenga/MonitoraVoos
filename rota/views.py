@@ -7,6 +7,7 @@ from django import forms
 
 # from rota.forms import CriarRotaForm
 from rota.models import Rota, Voo
+from rota.models import Rota, Voo, RotaForm, RotaUpdateForm
 
 # Create your views here.
 def login(request):
