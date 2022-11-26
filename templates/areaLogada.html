@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Login</title>
+    <title>Área logada</title>
 </head>
 
 <body>
@@ -37,56 +37,43 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
-        {% block content %}
-        <div class="row">
-            <div class="col-6">
-                <h2>Log in</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input name="username" type="text" class="form-control"
-                            placeholder="Enter username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    {% endblock content %}
-
+    {%block content%}
     <div class="container">
         <div class="jumbotron">
-
+            <h1 class="display-4">Bem vindo ao sistema de monitoramento de voos! <i class="fas fa-globe-americas"></i></h1>
             <hr class="my-4">
-                <p>Para navegar na área logada use a credencial correspondente ao perfil de teste</p>
+            {%if user.is_authenticated %}
+                <p>Escolha uma das opções abaixo</p>
                 <div class="row">
                     <div class="col">
-                        <p>Perfil: Operador de Voo (crud das rotas)</p>
-                        <p>Username: operador</p>
-                        <p>Password: operadoroperador</p>
+                        {% if perms.rota.change_rota %}
+                            <a class="btn btn-primary btn-lg" href="/crud" role="button">Gerenciar Voos</a>
+                        {% else %}
+                            <button disabled class="btn btn-primary btn-lg" role="button">Gerenciar Voos</button>
+                        {% endif %}
                     </div>
                     <div class="col">
-                        <p>Perfil: Funcionário de Companhia Aérea (atualiza status dos voos)</p>
-                        <p>Username: funcionario</p>
-                        <p>Password: funcionariofuncionario</p>
+                        {% if perms.rota.change_voo %}
+                            <a class="btn btn-primary btn-lg" href="/monitoramento" role="button">Monitorar Voos</a>
+                        {% else %}
+                            <button disabled class="btn btn-primary btn-lg" href="/monitoramento" role="button">Monitorar Voos</button>
+                        {% endif %}
                     </div>
                     <div class="col">
-                        <div class="col">
-                            <p>Perfil: Gerente (gera relatórios)</p>
-                            <p>Username: gerente</p>
-                            <p>Password: gerentegerente</p>
-                        </div>
+                        {% if perms.rota.view_voo %}
+                            <a class="btn btn-primary btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</a>
+                        {% else %}
+                            <button disabled class="btn btn-primary btn-lg" href="/geracao-relatorios" role="button">Gerar Relatórios</button>
+                        {% endif %}
                     </div>
                 </div>
-            </div>
+            {% else %}
+                <p>Você não está logado</p>
+                <a href="{% url 'login' %}">Log In</a>
+            {% endif%}
         </div>
+    </div>
+    {%endblock%}
 </body>
 
 </html>

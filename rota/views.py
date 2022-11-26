@@ -6,18 +6,14 @@ from django import forms
 # from django.contrib.auth.decorators import login_required, permission_required
 
 # from rota.forms import CriarRotaForm
-from rota.models import Rota, Voo, RotaForm, RotaUpdateForm, VooFuncionarioForm, VooPilotoForm, VooTorreForm
+from rota.models import Rota, Voo
 
 # Create your views here.
 def login(request):
     return render(request,"login.html")
 
-def area_logada(request):
-    voos = Voo.objects.all()
-    context = {
-        'voos': voos,
-    }
-    return render(request,"area_logada.html", context)
+def areaLogada(request):
+    return render(request,"areaLogada.html")
 
 def crud(request):
     return render(request,"crud.html")
@@ -66,21 +62,14 @@ def voos_destino(request):
 
 class MonitoraVoo(UpdateView):
     model = Voo
+    fields = ['status']
     template_name = 'monitoramento/status_manager.html'
     success_url = reverse_lazy('monitoramento')
-
-    def get_form_class(self):
-        if self.request.user.groups.filter(name='Piloto').exists():
-            return VooPilotoForm
-        elif self.request.user.groups.filter(name='Torre de Controle').exists():
-            return VooTorreForm
-        else:
-            return VooFuncionarioForm
 
 
 class RotaCreate(CreateView):
     model = Rota
-    form_class = RotaForm
+    fields = '__all__'
     success_url = reverse_lazy('crud')
 
 class RotaUpdateListView(ListView):
@@ -89,7 +78,7 @@ class RotaUpdateListView(ListView):
 
 class RotaUpdate(UpdateView):
     model = Rota
-    form_class= RotaUpdateForm
+    fields = ['aeronave', 'hora_partida_prevista', 'hora_chegada_prevista']
     success_url = reverse_lazy('crud')
 
 class RotaListView(ListView):
@@ -111,7 +100,7 @@ class RotaDelete(DeleteView):
 
 class VooCreate(CreateView):
     model = Voo
-    fields = ['rota', 'id', 'piloto', 'hora_partida', 'hora_chegada', 'data']
+    fields = '__all__'
     success_url = reverse_lazy('crud')
 
 class VooUpdateListView(ListView):
