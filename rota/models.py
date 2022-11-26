@@ -107,7 +107,6 @@ class RotaUpdateForm(ModelForm):
         super(RotaUpdateForm, self).clean()
 
         aeronave = self.cleaned_data.get('aeronave')
-
         hora_partida_prevista = self.cleaned_data.get('hora_partida_prevista')
         hora_chegada_prevista = self.cleaned_data.get('hora_chegada_prevista')
 
@@ -116,11 +115,9 @@ class RotaUpdateForm(ModelForm):
             self._errors['hora_chegada_prevista'] = self.error_class([
                 'Hora de chegada deve ser maior que hora de partida'])
 
-
         if aeronave not in ["A320", "A330", "747", "777"]:
              self._errors['aeronave'] = self.error_class([
                 'Aeronave não registrada no sistema'])
-
 
         return self.cleaned_data
 
